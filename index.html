@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haverford Opportunities by Major</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="utility-bar">
+      <div class="container">For Haverford College students</div>
+    </div>
+    <div class="container header-main">
+      <a href="#" class="brand">
+        <img src="images/haverford-logo.jpg" alt="Haverford College" class="brand-logo" width="649" height="290">
+        <span class="brand-title">Opportunities by Major</span>
+      </a>
+      <button type="button" id="profile-btn" class="profile-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="profile-drawer">
+        <span id="profile-avatar" class="avatar empty" aria-hidden="true"></span>
+        <span id="profile-btn-label">My Profile</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="profile-overlay" class="overlay" hidden></div>
+  <aside id="profile-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+    <div class="drawer-head">
+      <h2 id="drawer-title">My Profile</h2>
+      <button type="button" id="profile-close" class="close-btn" aria-label="Close profile">×</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Signed out -->
+      <div id="auth-view">
+        <p id="auth-notice" class="auth-notice" hidden></p>
+        <p class="drawer-intro">Create an account to save your major, get listings tailored to you, and keep track of events you've signed up for and attended.</p>
+        <div class="tabs" role="tablist">
+          <button type="button" id="tab-signin" class="tab active" role="tab">Sign in</button>
+          <button type="button" id="tab-signup" class="tab" role="tab">Create account</button>
+        </div>
+        <form id="auth-form" class="stack" novalidate>
+          <label>Email
+            <input id="auth-email" type="email" autocomplete="email" required placeholder="you@haverford.edu">
+          </label>
+          <label>Password
+            <input id="auth-password" type="password" autocomplete="current-password" required minlength="8">
+          </label>
+          <p id="auth-error" class="form-error" role="alert" hidden></p>
+          <button type="submit" id="auth-submit" class="primary-btn">Sign in</button>
+        </form>
+        <p class="fine-print">Profiles are saved in this browser only. Use the same browser and device to sign in again.</p>
+      </div>
+
+      <!-- Signed in -->
+      <div id="profile-view" hidden>
+        <div class="signed-in-as">
+          <span>Signed in as <strong id="profile-email"></strong></span>
+          <button type="button" id="sign-out" class="link-btn">Sign out</button>
+        </div>
+
+        <section class="drawer-section">
+          <h3>About you</h3>
+          <form id="profile-form" class="stack">
+            <label>Name
+              <input id="profile-name" type="text" autocomplete="name" placeholder="Optional">
+            </label>
+            <label>Major
+              <select id="profile-major-1"></select>
+            </label>
+            <label>Second major or minor
+              <select id="profile-major-2"></select>
+            </label>
+            <label>Class year
+              <select id="profile-year"></select>
+            </label>
+            <div class="save-row">
+              <button type="submit" class="primary-btn">Save profile</button>
+              <span id="profile-saved" class="saved-msg" role="status" hidden>Saved ✓</span>
+            </div>
+          </form>
+        </section>
+
+        <section class="drawer-section">
+          <h3>Signed up <span id="signed-up-count" class="count-pill">0</span></h3>
+          <ul id="signed-up-list" class="track-list"></ul>
+        </section>
+
+        <section class="drawer-section">
+          <h3>Attended <span id="attended-count" class="count-pill">0</span></h3>
+          <ul id="attended-list" class="track-list"></ul>
+          <form id="past-event-form" class="past-form">
+            <p class="past-form-label">Add an event you attended</p>
+            <label class="visually-hidden" for="past-title">Event name</label>
+            <input id="past-title" type="text" placeholder="Event name" required>
+            <label class="visually-hidden" for="past-date">Date</label>
+            <input id="past-date" type="date">
+            <button type="submit" class="secondary-btn">Add</button>
+          </form>
+        </section>
+
+        <button type="button" id="delete-account" class="danger-link">Delete account</button>
+      </div>
+    </div>
+  </aside>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Find opportunities for your major</h1>
+      <p>Internships, research, fellowships, jobs and events, with every deadline and eligibility requirement listed up front.</p>
+      <div class="search-wrap">
+        <label for="search" class="visually-hidden">Search opportunities</label>
+        <input id="search" type="search" placeholder="Search by title, organization or keyword…" autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <main class="container layout">
+    <aside class="filters" aria-label="Filters">
+      <div class="filters-head">
+        <h2>Filters</h2>
+        <button type="button" id="clear-filters" class="link-btn">Clear all</button>
+      </div>
+
+      <fieldset id="for-you-fieldset" hidden>
+        <legend>For you</legend>
+        <label class="check"><input type="checkbox" id="for-you"> <span class="check-text">Match my profile</span></label>
+        <p id="for-you-hint" class="filter-hint"></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Major</legend>
+        <label for="major-search" class="visually-hidden">Filter the list of majors</label>
+        <input id="major-search" type="search" class="major-search" placeholder="Find a major…" autocomplete="off">
+        <div id="major-list" class="check-list"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Type</legend>
+        <div id="type-list" class="check-list"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Class year</legend>
+        <div id="year-list" class="check-list"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Deadline</legend>
+        <label class="check"><input type="checkbox" id="hide-closed" checked> Hide past deadlines</label>
+        <label class="check"><input type="checkbox" id="closing-soon"> Closing within 14 days</label>
+      </fieldset>
+    </aside>
+
+    <section class="results" aria-live="polite">
+      <div class="results-bar">
+        <p id="result-count" class="result-count"></p>
+        <div class="sort">
+          <label for="sort">Sort by</label>
+          <select id="sort">
+            <option value="deadline">Deadline (soonest)</option>
+            <option value="title">Title (A–Z)</option>
+            <option value="newest">Recently added</option>
+          </select>
+        </div>
+      </div>
+      <div id="active-chips" class="chips"></div>
+      <div id="results" class="cards"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Always confirm deadlines and requirements with the posting organization before applying.</p>
+      <p>To list an opportunity, add it to <code>data/opportunities.js</code>.</p>
+    </div>
+  </footer>
+
+  <script src="data/majors.js"></script>
+  <script src="data/opportunities.js"></script>
+  <script src="auth.js"></script>
+  <script src="profile.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

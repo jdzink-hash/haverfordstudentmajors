@@ -1,7 +1,8 @@
 // Opportunity listings.
 //
 // Every listing MUST include:
-//   deadline     – "YYYY-MM-DD" (the last day to apply / register)
+//   deadline     – "YYYY-MM-DD" (the last day to apply / register),
+//                  or "rolling" for things you can join anytime (e.g. clubs)
 //   eligibility  – array of requirements (at least one)
 // Listings missing either are hidden and reported in the browser console.
 //
@@ -12,13 +13,14 @@
 //   type         one of TYPES in majors.js
 //   majors       array of majors from MAJORS, or ["All majors"]
 //   classYears   array from CLASS_YEARS (who may apply)
-//   deadline     "YYYY-MM-DD"
+//   deadline     "YYYY-MM-DD" or "rolling"
 //   eventDate    optional "YYYY-MM-DD" (for events, or program start)
+//   contact      optional email address
 //   location     e.g. "On campus", "Remote", "Philadelphia, PA"
 //   paid         true / false / undefined (unknown)
 //   description  short summary
 //   eligibility  array of strings
-//   link         URL to apply / learn more
+//   link         optional URL to apply / learn more
 //   added        "YYYY-MM-DD" date the listing was posted (for "Recently added")
 //   sample       true for placeholder listings; delete these when adding real ones
 
@@ -273,48 +275,166 @@ const OPPORTUNITIES = [
     added: "2026-10-02",
     sample: true,
   },
+  // ---------- Student clubs (real Haverford / Bi-Co / Tri-Co clubs) ----------
   {
-    id: "sample-club-women-in-stem",
-    title: "Women in STEM Society: Spring Membership",
-    organization: "Sample Student Club",
+    id: "club-womxn-in-economics",
+    title: "Womxn in Economics",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Economics"],
+    deadline: "rolling",
+    location: "On campus",
+    description: "Provides a support space for students studying economics who are underrepresented in the field. The club uplifts its members through activities such as hosting speakers, a book club, and a collaborative study space.",
+    eligibility: [
+      "For students studying economics, with a focus on those underrepresented in the field",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-havac",
+    title: "Haverford Accelerator (HAVAC)",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Computer Science", "Economics", "Mathematics and Statistics"],
+    deadline: "rolling",
+    location: "On campus",
+    description: "Helps students explore and build startups by combining startup education with hands-on building sessions and direct mentorship from experienced alumni founders, engineers, and investors. A supportive, cohort-based community where students build real products during their time at Haverford.",
+    eligibility: [
+      "Haverford students interested in startups and building products",
+      "Cohort-based: contact the club to find out how to join",
+    ],
+    contact: "havac.builds@gmail.com",
+    added: "2026-10-26",
+  },
+  {
+    id: "club-student-investment-portfolio",
+    title: "Haverford Student Investment Portfolio",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Economics", "Mathematics and Statistics"],
+    deadline: "rolling",
+    location: "On campus",
+    description: "The only investment club on campus. Members manage a real portfolio funded by the school, and the club runs workshops and events that teach students how investing works.",
+    eligibility: [
+      "Everyone is welcome",
+      "No investing experience needed",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-pre-health-society",
+    title: "Pre-Health Society",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Biology", "Chemistry", "Neuroscience (Bi-College Major)", "Psychology"],
+    deadline: "rolling",
+    location: "On campus",
+    description: "A student-led advocacy group working with faculty to build an inclusive community by communicating the needs of underrepresented students, connecting with health professionals, and providing opportunities to explore medicine and health-related issues.",
+    eligibility: [
+      "Students interested in medicine and health-related careers",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-pre-law-society",
+    title: "Pre-Law Society",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Political Science", "History", "Philosophy", "English", "Economics"],
+    deadline: "rolling",
+    location: "On campus",
+    eligibility: [
+      "Contact the club for membership details",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-swis",
+    title: "Supporting Women in STEM (SWIS)",
+    organization: "Haverford student club",
     type: "Club",
     majors: [
       "Astronomy", "Astrophysics", "Biology", "Chemistry", "Computer Science",
       "Mathematics and Statistics", "Neuroscience (Bi-College Major)", "Physics",
     ],
-    classYears: ["First-year", "Sophomore", "Junior", "Senior"],
-    deadline: "2027-01-25",
-    eventDate: "2027-02-01",
+    deadline: "rolling",
     location: "On campus",
-    description: "Peer mentoring, alumni panels and a lab-skills workshop series. New members are welcomed at the first spring meeting.",
+    description: "Aims to create an environment to uplift and encourage women and other underrepresented genders interested in science, technology, engineering, and mathematics at Haverford and beyond.",
     eligibility: [
-      "Open to all enrolled students interested in STEM",
-      "Complete the membership form by the deadline",
-      "Attend at least two meetings per semester to stay active",
+      "Open to all genders",
     ],
-    link: "#",
-    added: "2026-10-25",
-    sample: true,
+    added: "2026-10-26",
   },
   {
-    id: "sample-club-model-un",
-    title: "Model United Nations: Conference Delegation Tryouts",
-    organization: "Sample Student Club",
+    id: "club-tri-co-pre-dental",
+    title: "Tri-Co Pre-Dental Society",
+    organization: "Tri-Co student club",
     type: "Club",
-    majors: ["Political Science", "History", "Economics", "Linguistics", "French and Francophone Studies", "Spanish"],
-    classYears: ["First-year", "Sophomore", "Junior", "Senior"],
-    deadline: "2026-11-12",
-    eventDate: "2026-11-14",
+    majors: ["Biology", "Chemistry", "Neuroscience (Bi-College Major)"],
+    deadline: "rolling",
     location: "On campus",
-    description: "Try out for the delegation traveling to the spring intercollegiate conference. No prior Model UN experience needed.",
+    description: "For students interested in attending dental school and pursuing a career in dentistry. Offers information sessions, workshops, networking opportunities, and DAT prep support, with a welcoming and inclusive space to learn about dentistry and the inequities in oral healthcare.",
     eligibility: [
-      "Currently enrolled Haverford or Bryn Mawr student",
-      "Submit a one-page position paper on an assigned topic",
-      "Available for the conference weekend in March",
+      "Students interested in dental school and a career in dentistry",
     ],
-    link: "#",
-    added: "2026-10-23",
-    sample: true,
+    added: "2026-10-26",
+  },
+  {
+    id: "club-bico-engineering",
+    title: "BiCo Engineering",
+    organization: "Bi-Co student club",
+    type: "Club",
+    majors: ["Physics", "Computer Science", "Environmental Studies", "Mathematics and Statistics", "Chemistry"],
+    deadline: "rolling",
+    location: "Haverford and Bryn Mawr campuses",
+    description: "A collaborative space for students interested in building hands-on projects, filling the engineering gap on both the Bryn Mawr and Haverford campuses. Explore engineering, have fun building, and develop your own project ideas, with a main focus on sustainability and climate change awareness.",
+    eligibility: [
+      "Haverford and Bryn Mawr students",
+      "No building experience needed",
+    ],
+    contact: "bicoengineering26@gmail.com",
+    added: "2026-10-26",
+  },
+  {
+    id: "club-bico-neuroscience",
+    title: "Bi-Co Neuroscience Club",
+    organization: "Bi-Co student club",
+    type: "Club",
+    majors: ["Neuroscience (Bi-College Major)", "Psychology", "Biology"],
+    deadline: "rolling",
+    location: "Haverford and Bryn Mawr campuses",
+    eligibility: [
+      "Contact the club for membership details",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-bico-pre-vet",
+    title: "Bi-Co Pre-Veterinary Society",
+    organization: "Bi-Co student club",
+    type: "Club",
+    majors: ["Biology", "Chemistry"],
+    deadline: "rolling",
+    location: "Haverford and Bryn Mawr campuses",
+    description: "Provides resources for the veterinary professional path through prerequisite, internship, and animal-experience advising, plus meetings and contact with former Haverford students who are now in or out of vet school.",
+    eligibility: [
+      "Anyone interested in the veterinary professional path",
+    ],
+    added: "2026-10-26",
+  },
+  {
+    id: "club-havercode",
+    title: "HaverCode",
+    organization: "Haverford student club",
+    type: "Club",
+    majors: ["Computer Science"],
+    deadline: "rolling",
+    location: "On campus",
+    description: "A space where computer science majors and enthusiasts can explore the paths available to them, within the program and beyond. Connects peers with resources, opportunities, and networks, and fosters collaboration, mentorship, and hands-on experiences with fellow students, alumni, and professionals.",
+    eligibility: [
+      "Computer science majors and enthusiasts",
+    ],
+    added: "2026-10-26",
   },
   {
     id: "sample-polisci-dc",

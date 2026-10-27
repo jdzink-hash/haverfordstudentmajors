@@ -48,7 +48,12 @@
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
   }
 
+  function isRolling(str) {
+    return str === "rolling";
+  }
+
   function daysUntil(str) {
+    if (isRolling(str)) return Infinity;
     return Math.round((parseDate(str) - today()) / 86400000);
   }
 
@@ -63,7 +68,9 @@
   // Every listing must have a valid deadline and at least one eligibility requirement.
   const opportunities = OPPORTUNITIES.filter((o) => {
     const problems = [];
-    if (!o.deadline || !/^\d{4}-\d{2}-\d{2}$/.test(o.deadline)) problems.push("deadline (YYYY-MM-DD)");
+    if (!o.deadline || !(isRolling(o.deadline) || /^\d{4}-\d{2}-\d{2}$/.test(o.deadline))) {
+      problems.push('deadline (YYYY-MM-DD or "rolling")');
+    }
     if (!Array.isArray(o.eligibility) || o.eligibility.length === 0) problems.push("eligibility");
     if (!Array.isArray(o.majors) || o.majors.length === 0) problems.push("majors");
     if (problems.length) {
@@ -173,6 +180,7 @@
   // ---------- Rendering ----------
 
   function deadlineBadge(days) {
+    if (days === Infinity) return { cls: "open", text: "Rolling" };
     if (days < 0) return { cls: "closed", text: "Deadline passed" };
     if (days === 0) return { cls: "urgent", text: "Due today" };
     if (days === 1) return { cls: "urgent", text: "Due tomorrow" };
@@ -212,12 +220,18 @@
       row.appendChild(el("dd", null, value));
       meta.appendChild(row);
     };
-    addMeta("Deadline", formatDate(o.deadline), "meta-deadline");
+    addMeta("Deadline", isRolling(o.deadline) ? "Rolling: join anytime" : formatDate(o.deadline), "meta-deadline");
     const eventLabel = { Event: "Event date", Club: "First meeting" }[o.type] || "Starts";
     if (o.eventDate) addMeta(eventLabel, formatDate(o.eventDate));
     if (o.location) addMeta("Location", o.location);
     if (o.paid !== undefined) addMeta("Compensation", o.paid ? "Paid / funded" : "Unpaid / for credit");
     if (o.classYears) addMeta("Class years", o.classYears.join(", "));
+    if (o.contact) {
+      addMeta("Contact", "");
+      const link = el("a", null, o.contact);
+      link.href = `mailto:${o.contact}`;
+      meta.lastChild.querySelector("dd").appendChild(link);
+    }
     card.appendChild(meta);
 
     if (o.description) card.appendChild(el("p", "card-desc", o.description));

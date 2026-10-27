@@ -213,7 +213,8 @@
       meta.appendChild(row);
     };
     addMeta("Deadline", formatDate(o.deadline), "meta-deadline");
-    if (o.eventDate) addMeta(o.type === "Event" ? "Event date" : "Starts", formatDate(o.eventDate));
+    const eventLabel = { Event: "Event date", Club: "First meeting" }[o.type] || "Starts";
+    if (o.eventDate) addMeta(eventLabel, formatDate(o.eventDate));
     if (o.location) addMeta("Location", o.location);
     if (o.paid !== undefined) addMeta("Compensation", o.paid ? "Paid / funded" : "Unpaid / for credit");
     if (o.classYears) addMeta("Class years", o.classYears.join(", "));
@@ -312,7 +313,7 @@
     if (state.closingSoon) p.set("soon", "1");
     if (state.sort !== "deadline") p.set("sort", state.sort);
     const qs = p.toString();
-    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+    history.replaceState(null, "", location.pathname + (qs ? `?${qs}` : ""));
   }
 
   function readUrl() {

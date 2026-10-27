@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Haverford Opportunities by Major</title>
+  <title>FordFutures | Haverford Opportunities by Major</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,17 +11,23 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="utility-bar">
-      <div class="container">For Haverford College students</div>
-    </div>
     <div class="container header-main">
       <a href="#" class="brand">
-        <img src="images/haverford-logo.jpg" alt="Haverford College" class="brand-logo" width="649" height="290">
-        <span class="brand-title">Opportunities by Major</span>
+        <img src="images/haverford-logo.png" alt="Haverford College" class="brand-logo" width="649" height="290">
+        <span class="brand-title">Ford<span class="brand-accent">Futures</span></span>
       </a>
       <button type="button" id="profile-btn" class="profile-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="profile-drawer">
-        <span id="profile-avatar" class="avatar empty" aria-hidden="true"></span>
-        <span id="profile-btn-label">My Profile</span>
+        <span id="profile-avatar" class="avatar signed-out" aria-hidden="true">
+          <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>
+          </svg>
+          <span id="profile-initials" class="avatar-initials"></span>
+        </span>
+        <span id="profile-btn-label" class="profile-btn-label">My Profile</span>
+        <svg class="profile-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
       </button>
     </div>
   </header>
@@ -110,7 +116,7 @@
   <section class="hero">
     <div class="container">
       <h1>Find opportunities for your major</h1>
-      <p>Internships, research, fellowships, jobs and events, with every deadline and eligibility requirement listed up front.</p>
+      <p>Internships, research, fellowships, jobs, clubs and events, with every deadline and eligibility requirement listed up front.</p>
       <div class="search-wrap">
         <label for="search" class="visually-hidden">Search opportunities</label>
         <input id="search" type="search" placeholder="Search by title, organization or keyword…" autocomplete="off">

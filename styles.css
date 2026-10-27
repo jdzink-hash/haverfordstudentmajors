@@ -43,15 +43,6 @@ a { color: var(--red); }
 
 /* ---------- Header ---------- */
 
-.utility-bar {
-  background: var(--black);
-  color: #d8d8d8;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding-block: 6px;
-}
-
 .site-header { background: var(--white); border-bottom: 4px solid var(--red); }
 
 .header-main {
@@ -65,25 +56,35 @@ a { color: var(--red); }
 .profile-btn {
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--white); color: var(--black);
-  border: 2px solid var(--red); border-radius: 999px;
-  padding: 5px 16px 5px 5px;
-  font: inherit; font-weight: 700; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px;
+  margin-left: auto;
+  padding: 5px 12px 5px 5px;
+  font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-.profile-btn:hover { background: var(--red-tint); }
+.profile-btn:hover, .profile-btn[aria-expanded="true"] {
+  border-color: var(--red);
+  box-shadow: 0 3px 10px rgba(139, 30, 43, 0.15);
+}
+.profile-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
 .avatar {
   display: grid; place-items: center;
-  width: 34px; height: 34px; border-radius: 50%;
-  background: var(--red); color: var(--white);
-  font-size: 14px; font-weight: 700;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(145deg, var(--red) 0%, var(--red-dark) 100%);
+  color: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
 }
-/* Generic person silhouette when signed out */
-.avatar.empty {
-  background:
-    radial-gradient(circle at 50% 38%, var(--white) 0 6px, transparent 6.5px),
-    radial-gradient(ellipse at 50% 100%, var(--white) 0 11px, transparent 11.5px),
-    var(--red);
+.avatar-icon { width: 20px; height: 20px; }
+.avatar-initials { font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: 0.02em; }
+.avatar.signed-out .avatar-initials, .avatar:not(.signed-out) .avatar-icon { display: none; }
+
+.profile-chevron {
+  width: 14px; height: 14px; color: var(--gray);
+  transition: transform 0.15s, color 0.15s;
 }
+.profile-btn:hover .profile-chevron { color: var(--red); transform: translateX(2px); }
 
 /* ---------- Profile drawer ---------- */
 
@@ -219,10 +220,12 @@ a { color: var(--red); }
 .brand-logo { display: block; height: 72px; width: auto; }
 
 .brand-title {
-  font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--black);
+  font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--black);
+  letter-spacing: -0.01em;
   border-left: 2px solid var(--line);
   padding-left: 20px;
 }
+.brand-accent { color: var(--red); }
 
 /* ---------- Hero ---------- */
 
@@ -451,8 +454,6 @@ legend {
 
 @media (max-width: 480px) {
   .brand-logo { height: 56px; }
-  .brand-title { font-size: 18px; padding-left: 14px; }
-  .profile-btn { margin-left: auto; }
-  .card { padding: 16px; }
+  .brand-title { font-size: 22px; padding-left: 14px; }  .card { padding: 16px; }
   .deadline-badge { margin-left: 0; }
 }

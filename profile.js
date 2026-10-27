@@ -9,6 +9,7 @@ const ProfileUI = (function () {
     button: $("profile-btn"),
     buttonLabel: $("profile-btn-label"),
     avatar: $("profile-avatar"),
+    initials: $("profile-initials"),
     overlay: $("profile-overlay"),
     drawer: $("profile-drawer"),
     close: $("profile-close"),
@@ -293,14 +294,14 @@ const ProfileUI = (function () {
 
     if (!profile) {
       els.buttonLabel.textContent = "My Profile";
-      els.avatar.textContent = "";
-      els.avatar.classList.add("empty");
+      els.initials.textContent = "";
+      els.avatar.classList.add("signed-out");
       return;
     }
 
     els.buttonLabel.textContent = profile.name.trim().split(/\s+/)[0] || "My Profile";
-    els.avatar.textContent = initials(profile);
-    els.avatar.classList.remove("empty");
+    els.initials.textContent = initials(profile);
+    els.avatar.classList.remove("signed-out");
 
     els.email.textContent = profile.email;
     // Don't overwrite fields while the user is typing in them.

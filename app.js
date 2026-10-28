@@ -228,7 +228,7 @@
     }[o.deadline] || formatDate(o.deadline);
     addMeta("Deadline", deadlineText, "meta-deadline");
     const eventLabel = { Event: "Event date", Club: "First meeting" }[o.type] || "Starts";
-    if (o.eventDate) addMeta(eventLabel, formatDate(o.eventDate));
+    if (o.eventDate) addMeta(eventLabel, formatDate(o.eventDate) + (o.time ? `, ${o.time}` : ""));
     if (o.location) addMeta("Location", o.location);
     if (o.paid !== undefined) addMeta("Compensation", o.paid ? "Paid / funded" : "Unpaid / for credit");
     if (o.classYears) addMeta("Class years", o.classYears.join(", "));
@@ -238,6 +238,7 @@
       link.href = `mailto:${o.contact}`;
       meta.lastChild.querySelector("dd").appendChild(link);
     }
+    if (o.award) addMeta("Funding", o.award, "meta-wide");
     if (o.cost) addMeta("Cost", o.cost, "meta-wide");
     if (o.deadlineNote) addMeta("Deadline details", o.deadlineNote, "meta-wide");
     card.appendChild(meta);
@@ -270,13 +271,16 @@
       return btn;
     };
     if (days >= 0 || signedUp) {
-      const [label, activeLabel] = o.type === "Summer Program"
+      const [label, activeLabel] = ["Summer Program", "Funding"].includes(o.type)
         ? ["Mark as applied", "✓ Applied"]
         : ["Mark as signed up", "✓ Signed up"];
       actions.appendChild(trackBtn(label, activeLabel, signedUp, () => ProfileUI.toggleSignedUp(o)));
     }
     if (o.type !== "Club") {
-      actions.appendChild(trackBtn("Mark attended", "✓ Attended", attended, () => ProfileUI.toggleAttended(o)));
+      const [label, activeLabel] = o.type === "Funding"
+        ? ["Mark as received", "✓ Received"]
+        : ["Mark attended", "✓ Attended"];
+      actions.appendChild(trackBtn(label, activeLabel, attended, () => ProfileUI.toggleAttended(o)));
     }
     if (o.link) {
       const a = el("a", "apply-btn", days < 0 ? "View details" : "Learn more & apply");

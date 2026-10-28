@@ -234,7 +234,10 @@ const ProfileUI = (function () {
         }
         li.appendChild(info);
         const actions = el("div", "track-actions");
-        if (o.deadline && o.type !== "Club") actions.appendChild(iconButton(`Mark ${o.title} as attended`, "Attended", () => toggleAttended(o)));
+        if (o.deadline && o.type !== "Club") {
+          const done = o.type === "Funding" ? "Received" : "Attended";
+          actions.appendChild(iconButton(`Mark ${o.title} as ${done.toLowerCase()}`, done, () => toggleAttended(o)));
+        }
         actions.appendChild(iconButton(`Remove ${o.title}`, "Remove", () => toggleSignedUp(o)));
         li.appendChild(actions);
         els.signedUpList.appendChild(li);

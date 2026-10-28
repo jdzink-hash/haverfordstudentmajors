@@ -2,7 +2,8 @@
 //
 // Every listing MUST include:
 //   deadline     – "YYYY-MM-DD" (the last day to apply / register),
-//                  or "rolling" for things you can join anytime (e.g. clubs)
+//                  "rolling" for things you can join anytime (e.g. clubs),
+//                  or "tbd" when the organization hasn't posted a deadline yet
 //   eligibility  – array of requirements (at least one)
 // Listings missing either are hidden and reported in the browser console.
 //
@@ -13,8 +14,10 @@
 //   type         one of TYPES in majors.js
 //   majors       array of majors from MAJORS, or ["All majors"]
 //   classYears   array from CLASS_YEARS (who may apply)
-//   deadline     "YYYY-MM-DD" or "rolling"
+//   deadline     "YYYY-MM-DD", "rolling" or "tbd"
+//   deadlineNote optional extra detail shown under the deadline
 //   eventDate    optional "YYYY-MM-DD" (for events, or program start)
+//   cost         optional cost / tuition text for programs that charge
 //   contact      optional email address
 //   location     e.g. "On campus", "Remote", "Philadelphia, PA"
 //   paid         true / false / undefined (unknown)
@@ -275,6 +278,107 @@ const OPPORTUNITIES = [
     added: "2026-10-02",
     sample: true,
   },
+  // ---------- Summer business programs (details from each program's website, Oct 2026) ----------
+  {
+    id: "summer-tuck-bridge",
+    title: "Tuck Business Bridge Program",
+    organization: "Tuck School of Business at Dartmouth",
+    type: "Summer Program",
+    majors: ["All majors"],
+    classYears: ["First-year", "Sophomore", "Junior", "Senior"],
+    deadline: "rolling",
+    deadlineNote: "Applications open Dec 1, 2026 and are reviewed on a rolling basis until each session fills (typically March–April). Apply early: admission is first-come, first-considered.",
+    eventDate: "2027-06-06",
+    location: "Hanover, NH (in person)",
+    cost: "$11,300 per session (meals, lodging and materials included); need-based awards available",
+    description: "A three-week certificate program for liberal arts and STEM undergraduates, combining an intensive business curriculum taught by Tuck MBA faculty with a capstone team project, recruiting services, and one-on-one career guidance. Summer 2027 sessions: June 6–25 and July 5–23.",
+    eligibility: [
+      "Liberal arts or STEM undergraduates who have completed at least one year of college, or recent graduates within 6 months of graduating",
+      "Rising sophomores also need a GPA of 3.5+ and an SAT/ACT math score of 700+",
+      "At least one quantitative class with a grade of B or above preferred",
+      "Application: transcript, resume, SAT/ACT scores (optional if your college didn't require them), one 200–300 word essay, and one faculty recommendation",
+    ],
+    link: "https://bridge.tuck.dartmouth.edu/",
+    added: "2026-10-28",
+  },
+  {
+    id: "summer-villanova-sbi",
+    title: "Summer Business Institute (Business Minor)",
+    organization: "Villanova School of Business",
+    type: "Summer Program",
+    majors: ["All majors"],
+    classYears: ["First-year", "Sophomore", "Junior", "Senior"],
+    deadline: "2027-04-15",
+    deadlineNote: "Applications open Jan 15, 2027. Admissions are rolling, with decisions in about 2 weeks.",
+    eventDate: "2027-05-17",
+    location: "Online (live and self-paced)",
+    cost: "$17,750; need-based scholarships are for Villanova students only",
+    description: "Earn a business minor in one summer through this 16-credit, fully online program taught by Villanova School of Business faculty. Designed for students who want business skills without changing their major. Runs May 17 – July 23, 2027.",
+    eligibility: [
+      "All class years, including recent graduates",
+      "Cumulative GPA above 2.0 and not on academic probation",
+      "Well suited to liberal arts and sciences students",
+      "Only the application form is required",
+    ],
+    link: "https://www.villanova.edu/university/business/academics/undergraduate-programs/degrees/non-business-students/sbi.html",
+    added: "2026-10-28",
+  },
+  {
+    id: "summer-wake-forest-smp",
+    title: "Summer Management Program",
+    organization: "Wake Forest University School of Business",
+    type: "Summer Program",
+    majors: ["All majors"],
+    classYears: ["First-year", "Sophomore", "Junior"],
+    deadline: "tbd",
+    deadlineNote: "Summer 2027 dates and deadline aren't posted yet. In 2026 the program ran May 27 – July 1, and the enrollment deadline was May 22, 2026.",
+    location: "Winston-Salem, NC",
+    cost: "$13,672 in 2026 (tuition, books and fees; housing extra); limited scholarships available",
+    description: "A five-week introduction to business fundamentals combining coursework, real-world case studies, career coaching, and team projects. Open to students from any liberal arts major; graded pass/fail.",
+    eligibility: [
+      "Liberal arts majors who will be rising sophomores, juniors, or seniors",
+      "Students from other colleges must complete a summer visiting student application and send a transcript or letter of good standing",
+    ],
+    link: "https://business.wfu.edu/smp/",
+    added: "2026-10-28",
+  },
+  {
+    id: "summer-vanderbilt-accelerator",
+    title: "Accelerator Summer Business Immersion",
+    organization: "Vanderbilt University, Owen Graduate School of Management",
+    type: "Summer Program",
+    majors: ["All majors"],
+    classYears: ["First-year", "Sophomore", "Junior", "Senior"],
+    deadline: "tbd",
+    deadlineNote: "Summer 2027 dates, deadline and cost aren't posted yet. Email the contact below for details.",
+    location: "Nashville, TN (in person)",
+    description: "A full-time, 3.5-week program that builds business knowledge, career readiness, and hands-on consulting experience. Students work in teams on real consulting projects for companies and present their ideas to executives.",
+    eligibility: [
+      "Undergraduates and recent college graduates",
+      "Open to students from any college and any major",
+    ],
+    contact: "owenadmissions@vanderbilt.edu",
+    link: "https://business.vanderbilt.edu/accelerator-summer-business-immersion/",
+    added: "2026-10-28",
+  },
+  {
+    id: "summer-berkeley-base",
+    title: "BASE Summer Program (Business for Arts, Sciences and Engineering)",
+    organization: "UC Berkeley, Haas School of Business",
+    type: "Summer Program",
+    majors: ["All majors"],
+    deadline: "tbd",
+    deadlineNote: "No 2027 details are posted, and the program's own pages are currently offline. Haas's summer page still lists BASE, so confirm with Haas before applying.",
+    location: "Berkeley, CA",
+    description: "An intensive six-week summer program that teaches business fundamentals to undergraduates in the arts, sciences, and engineering, for academic credit.",
+    eligibility: [
+      "Undergraduates majoring in liberal arts, sciences, or engineering",
+      "Business and pre-business majors should not apply",
+    ],
+    link: "https://haas.berkeley.edu/undergrad/academics/summer-session/",
+    added: "2026-10-28",
+  },
+
   // ---------- Student clubs (real Haverford / Bi-Co / Tri-Co clubs) ----------
   {
     id: "club-womxn-in-economics",

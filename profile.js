@@ -166,7 +166,7 @@ const ProfileUI = (function () {
   // ---------- Event tracking ----------
 
   function eventDate(o) {
-    return o.eventDate || (o.deadline === "rolling" ? "" : o.deadline);
+    return o.eventDate || (/^\d{4}-\d{2}-\d{2}$/.test(o.deadline) ? o.deadline : "");
   }
 
   async function toggleSignedUp(o) {
@@ -228,13 +228,13 @@ const ProfileUI = (function () {
         const info = el("div", "track-info");
         info.appendChild(el("span", "track-title", o.title));
         if (o.deadline) {
-          const deadline = o.deadline === "rolling" ? "rolling deadline" : `deadline ${formatDate(o.deadline)}`;
+          const deadline = { rolling: "rolling deadline", tbd: "deadline TBA" }[o.deadline] || `deadline ${formatDate(o.deadline)}`;
           info.appendChild(el("span", "track-date",
             o.eventDate ? `${formatDate(o.eventDate)} · ${deadline}` : deadline[0].toUpperCase() + deadline.slice(1)));
         }
         li.appendChild(info);
         const actions = el("div", "track-actions");
-        if (o.deadline) actions.appendChild(iconButton(`Mark ${o.title} as attended`, "Attended", () => toggleAttended(o)));
+        if (o.deadline && o.type !== "Club") actions.appendChild(iconButton(`Mark ${o.title} as attended`, "Attended", () => toggleAttended(o)));
         actions.appendChild(iconButton(`Remove ${o.title}`, "Remove", () => toggleSignedUp(o)));
         li.appendChild(actions);
         els.signedUpList.appendChild(li);

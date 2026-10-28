@@ -362,6 +362,7 @@ legend {
 .deadline-badge.soon { background: #fbf1dc; color: #8a5d00; }
 .deadline-badge.urgent { background: var(--red); color: var(--white); }
 .deadline-badge.closed { background: #eeeeee; color: var(--gray); }
+.deadline-badge.tba { background: #eeeeee; color: var(--charcoal); }
 
 .card-title { font-size: 22px; margin: 12px 0 2px; }
 .card-org { margin: 0 0 14px; color: var(--gray); font-weight: 600; }
@@ -379,6 +380,7 @@ legend {
   letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray);
 }
 .meta-row dd { margin: 0; color: var(--black); }
+.meta-wide { grid-column: 1 / -1; }
 .meta-deadline dt { color: var(--red); }
 .meta-deadline dd { font-weight: 700; }
 

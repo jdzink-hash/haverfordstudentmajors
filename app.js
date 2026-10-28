@@ -48,12 +48,13 @@
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
   }
 
-  function isRolling(str) {
-    return str === "rolling";
+  // "rolling" (apply/join anytime) and "tbd" (not announced yet) have no fixed date.
+  function isOpenEnded(str) {
+    return str === "rolling" || str === "tbd";
   }
 
   function daysUntil(str) {
-    if (isRolling(str)) return Infinity;
+    if (isOpenEnded(str)) return Infinity;
     return Math.round((parseDate(str) - today()) / 86400000);
   }
 
@@ -68,8 +69,8 @@
   // Every listing must have a valid deadline and at least one eligibility requirement.
   const opportunities = OPPORTUNITIES.filter((o) => {
     const problems = [];
-    if (!o.deadline || !(isRolling(o.deadline) || /^\d{4}-\d{2}-\d{2}$/.test(o.deadline))) {
-      problems.push('deadline (YYYY-MM-DD or "rolling")');
+    if (!o.deadline || !(isOpenEnded(o.deadline) || /^\d{4}-\d{2}-\d{2}$/.test(o.deadline))) {
+      problems.push('deadline (YYYY-MM-DD, "rolling" or "tbd")');
     }
     if (!Array.isArray(o.eligibility) || o.eligibility.length === 0) problems.push("eligibility");
     if (!Array.isArray(o.majors) || o.majors.length === 0) problems.push("majors");
@@ -179,8 +180,9 @@
 
   // ---------- Rendering ----------
 
-  function deadlineBadge(days) {
-    if (days === Infinity) return { cls: "open", text: "Rolling" };
+  function deadlineBadge(deadline, days) {
+    if (deadline === "tbd") return { cls: "tba", text: "Deadline TBA" };
+    if (deadline === "rolling") return { cls: "open", text: "Rolling" };
     if (days < 0) return { cls: "closed", text: "Deadline passed" };
     if (days === 0) return { cls: "urgent", text: "Due today" };
     if (days === 1) return { cls: "urgent", text: "Due tomorrow" };
@@ -197,7 +199,7 @@
 
   function renderCard(o) {
     const days = daysUntil(o.deadline);
-    const badge = deadlineBadge(days);
+    const badge = deadlineBadge(o.deadline, days);
 
     const card = el("article", `card${days < 0 ? " is-closed" : ""}`);
 
@@ -220,7 +222,11 @@
       row.appendChild(el("dd", null, value));
       meta.appendChild(row);
     };
-    addMeta("Deadline", isRolling(o.deadline) ? "Rolling: join anytime" : formatDate(o.deadline), "meta-deadline");
+    const deadlineText = {
+      rolling: o.type === "Club" ? "Rolling: join anytime" : "Rolling admissions",
+      tbd: "Not announced yet",
+    }[o.deadline] || formatDate(o.deadline);
+    addMeta("Deadline", deadlineText, "meta-deadline");
     const eventLabel = { Event: "Event date", Club: "First meeting" }[o.type] || "Starts";
     if (o.eventDate) addMeta(eventLabel, formatDate(o.eventDate));
     if (o.location) addMeta("Location", o.location);
@@ -232,6 +238,8 @@
       link.href = `mailto:${o.contact}`;
       meta.lastChild.querySelector("dd").appendChild(link);
     }
+    if (o.cost) addMeta("Cost", o.cost, "meta-wide");
+    if (o.deadlineNote) addMeta("Deadline details", o.deadlineNote, "meta-wide");
     card.appendChild(meta);
 
     if (o.description) card.appendChild(el("p", "card-desc", o.description));
@@ -262,9 +270,14 @@
       return btn;
     };
     if (days >= 0 || signedUp) {
-      actions.appendChild(trackBtn("Mark as signed up", "✓ Signed up", signedUp, () => ProfileUI.toggleSignedUp(o)));
+      const [label, activeLabel] = o.type === "Summer Program"
+        ? ["Mark as applied", "✓ Applied"]
+        : ["Mark as signed up", "✓ Signed up"];
+      actions.appendChild(trackBtn(label, activeLabel, signedUp, () => ProfileUI.toggleSignedUp(o)));
     }
-    actions.appendChild(trackBtn("Mark attended", "✓ Attended", attended, () => ProfileUI.toggleAttended(o)));
+    if (o.type !== "Club") {
+      actions.appendChild(trackBtn("Mark attended", "✓ Attended", attended, () => ProfileUI.toggleAttended(o)));
+    }
     if (o.link) {
       const a = el("a", "apply-btn", days < 0 ? "View details" : "Learn more & apply");
       a.href = o.link;

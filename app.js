@@ -270,24 +270,32 @@
       btn.addEventListener("click", onClick);
       return btn;
     };
+    if (o.link) {
+      const a = el("a", "apply-btn", days < 0 ? "View details" : o.type === "Event" ? "Learn more & register" : "Learn more & apply");
+      a.href = o.link;
+      a.target = "_blank";
+      a.rel = "noopener";
+      actions.appendChild(a);
+    }
     if (days >= 0 || signedUp) {
-      const [label, activeLabel] = ["Summer Program", "Funding"].includes(o.type)
+      const [label, activeLabel] = ["Summer Education Program", "Funding"].includes(o.type)
         ? ["Mark as applied", "✓ Applied"]
         : ["Mark as signed up", "✓ Signed up"];
       actions.appendChild(trackBtn(label, activeLabel, signedUp, () => ProfileUI.toggleSignedUp(o)));
+    }
+    const calendarUrl = signedUp && Calendar.googleUrl(o);
+    if (calendarUrl) {
+      const cal = el("a", "track-btn cal-btn", "Add to Google Calendar");
+      cal.href = calendarUrl;
+      cal.target = "_blank";
+      cal.rel = "noopener";
+      actions.appendChild(cal);
     }
     if (o.type !== "Club") {
       const [label, activeLabel] = o.type === "Funding"
         ? ["Mark as received", "✓ Received"]
         : ["Mark attended", "✓ Attended"];
       actions.appendChild(trackBtn(label, activeLabel, attended, () => ProfileUI.toggleAttended(o)));
-    }
-    if (o.link) {
-      const a = el("a", "apply-btn", days < 0 ? "View details" : "Learn more & apply");
-      a.href = o.link;
-      a.target = "_blank";
-      a.rel = "noopener";
-      actions.appendChild(a);
     }
     footer.appendChild(actions);
     card.appendChild(footer);

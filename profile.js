@@ -172,13 +172,15 @@ const ProfileUI = (function () {
   async function toggleSignedUp(o) {
     const profile = Auth.current();
     if (!profile) return open("Sign in or create an account to keep track of events you've signed up for.");
-    const signedUp = profile.signedUp.includes(o.id)
-      ? profile.signedUp.filter((id) => id !== o.id)
-      : profile.signedUp.concat(o.id);
+    const adding = !profile.signedUp.includes(o.id);
+    const signedUp = adding
+      ? profile.signedUp.concat(o.id)
+      : profile.signedUp.filter((id) => id !== o.id);
     await Auth.update({
       signedUp,
       attended: profile.attended.filter((a) => a.id !== o.id),
     });
+    if (adding) Calendar.emailInvite(profile, o);
   }
 
   async function toggleAttended(o) {
@@ -234,6 +236,15 @@ const ProfileUI = (function () {
         }
         li.appendChild(info);
         const actions = el("div", "track-actions");
+        const calendarUrl = Calendar.googleUrl(o);
+        if (calendarUrl) {
+          const cal = el("a", "mini-btn", "Calendar");
+          cal.href = calendarUrl;
+          cal.target = "_blank";
+          cal.rel = "noopener";
+          cal.setAttribute("aria-label", `Add ${o.title} to Google Calendar`);
+          actions.appendChild(cal);
+        }
         if (o.deadline && o.type !== "Club") {
           const done = o.type === "Funding" ? "Received" : "Attended";
           actions.appendChild(iconButton(`Mark ${o.title} as ${done.toLowerCase()}`, done, () => toggleAttended(o)));

@@ -271,7 +271,7 @@
       return btn;
     };
     if (o.link) {
-      const a = el("a", "apply-btn", days < 0 ? "View details" : o.type === "Event" ? "Learn more & register" : "Learn more & apply");
+      const a = el("a", "apply-btn", days < 0 ? "View details" : ["Event", "Career Prep"].includes(o.type) ? "Learn more & register" : "Learn more & apply");
       a.href = o.link;
       a.target = "_blank";
       a.rel = "noopener";
@@ -294,6 +294,8 @@
     if (o.type !== "Club") {
       const [label, activeLabel] = o.type === "Funding"
         ? ["Mark as received", "✓ Received"]
+        : o.type === "Career Prep"
+        ? ["Mark completed", "✓ Completed"]
         : ["Mark attended", "✓ Attended"];
       actions.appendChild(trackBtn(label, activeLabel, attended, () => ProfileUI.toggleAttended(o)));
     }

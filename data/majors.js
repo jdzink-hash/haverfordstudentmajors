@@ -33,6 +33,6 @@ const MAJORS = [
   "Spanish",
 ];
 
-const TYPES = ["Internship", "Research", "Fellowship", "Funding", "Job", "Summer Education Program", "Event", "Scholarship", "Club", "Volunteer", "Career Prep"];
+const TYPES = ["Internship", "Research", "Fellowship", "Funding", "Job", "Summer Education Program", "Event", "Scholarship", "Club", "Volunteer", "Career Prep", "Graduate Program"];
 
 const CLASS_YEARS = ["First-year", "Sophomore", "Junior", "Senior"];

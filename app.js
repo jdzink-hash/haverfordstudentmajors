@@ -278,7 +278,7 @@
       actions.appendChild(a);
     }
     if (days >= 0 || signedUp) {
-      const [label, activeLabel] = ["Summer Education Program", "Funding"].includes(o.type)
+      const [label, activeLabel] = ["Summer Education Program", "Funding", "Graduate Program"].includes(o.type)
         ? ["Mark as applied", "✓ Applied"]
         : ["Mark as signed up", "✓ Signed up"];
       actions.appendChild(trackBtn(label, activeLabel, signedUp, () => ProfileUI.toggleSignedUp(o)));
@@ -296,6 +296,8 @@
         ? ["Mark as received", "✓ Received"]
         : o.type === "Career Prep"
         ? ["Mark completed", "✓ Completed"]
+        : o.type === "Graduate Program"
+        ? ["Mark as accepted", "✓ Accepted"]
         : ["Mark attended", "✓ Attended"];
       actions.appendChild(trackBtn(label, activeLabel, attended, () => ProfileUI.toggleAttended(o)));
     }

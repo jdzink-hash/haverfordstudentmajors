@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Project | FordFutures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-main">
+      <a href="index.html" class="brand" aria-label="FordFutures, Haverford College">
+        <img src="images/fordfutures-logo.png" alt="" class="brand-mark" width="256" height="256">
+        <span class="brand-text">
+          <span class="brand-title">Ford<span class="brand-accent">Futures</span><sup class="brand-tm" aria-label="trademark">™</sup></span>
+          <span class="brand-sub">Haverford College</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="index.html" class="nav-link">Opportunities</a>
+        <a href="project.html" class="nav-link" aria-current="page">Our Project</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">The story behind FordFutures</p>
+      <h1>From a “how might we” to a working site</h1>
+      <p>How we went from three problem statements to one tool that helps Haverford students find opportunities that fit their major and interests.</p>
+      <ul class="hero-stats" aria-label="FordFutures at a glance">
+        <li><strong id="stat-listings">100+</strong><span>listings</span></li>
+        <li><strong id="stat-majors">31</strong><span>majors covered</span></li>
+        <li><strong id="stat-types">12</strong><span>opportunity types</span></li>
+        <li><strong id="stat-clubs">25</strong><span>career &amp; major clubs</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <main class="container project-layout">
+    <nav class="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#how-might-we">How Might We</a></li>
+        <li><a href="#wild-ideas">Wild Ideas / Bad Ideas</a></li>
+        <li><a href="#final-idea">Final Project Idea + Persona</a></li>
+        <li><a href="#brand">Brand Identity</a></li>
+        <li><a href="#testing">What We Tested &amp; Learned</a></li>
+        <li><a href="#next-steps">Next Steps &amp; Support Needed</a></li>
+      </ol>
+    </nav>
+
+    <div class="sections">
+      <!-- 1 -->
+      <section id="how-might-we" class="section-card">
+        <span class="section-num">Step 1</span>
+        <h2>How Might We</h2>
+        <p class="section-lede">We started with three problems we noticed in everyday life.</p>
+        <ol class="hmw-list">
+          <li class="chosen">How might we help students have an easier time finding opportunities and programs that are related to their interests and major? <span class="chosen-tag">Our pick</span></li>
+          <li>How might we create clothing trends that are long-lasting rather than very short, to prevent waste?</li>
+          <li>How might we create a way for people to see reviews for specific menu items at a cafe, instead of a general review of the whole cafe?</li>
+        </ol>
+      </section>
+
+      <!-- 2 -->
+      <section id="wild-ideas" class="section-card">
+        <span class="section-num">Step 2</span>
+        <h2>Wild Ideas / Bad Ideas</h2>
+        <p class="section-lede">Before narrowing down, we pushed for the biggest, strangest and even worst answers to our question.</p>
+        <div class="idea-grid">
+          <div class="idea"><strong>A squirrel that follows you around campus</strong><span>A costumed mascot who shouts deadlines at you between classes.</span></div>
+          <div class="idea"><strong>Apply to everything automatically</strong><span>One button that sends your resume to every opportunity, whether it fits or not.</span></div>
+          <div class="idea"><strong>Deadline billboard on Lancaster Ave</strong><span>A giant countdown sign everyone drives past.</span></div>
+          <div class="idea"><strong>A personal career agent for every student</strong><span>Like a sports agent, but for summer internships.</span></div>
+          <div class="idea"><strong>Opportunity fortune cookies at the DC</strong><span>Every meal comes with a random internship inside.</span></div>
+          <div class="idea"><strong>Email every listing to every student</strong><span>The opposite of our goal: maximum inbox overload.</span></div>
+        </div>
+        <h3>What the bad ideas taught us</h3>
+        <ul>
+          <li>Students don't need <em>more</em> opportunities pushed at them. They need the right ones, filtered by major and class year.</li>
+          <li>Deadlines are the moment that matters, so they should be the first thing you see.</li>
+          <li>It has to live in one place, not spread across Handshake, email, department pages and Squirrel Space.</li>
+        </ul>
+      </section>
+
+      <!-- 3 -->
+      <section id="final-idea" class="section-card">
+        <span class="section-num">Step 3</span>
+        <h2>Final Project Idea + Persona</h2>
+        <p class="section-lede">FordFutures: one place to find every opportunity that fits your major.</p>
+        <h3>What we made</h3>
+        <p>A website that collects internships, research, fellowships, summer funding, graduate programs, career prep resources, events and clubs from across Haverford, and lets students filter them by major, type and class year. Every card shows the deadline, eligibility and a direct link to apply. Students can create a profile to get listings matched to them, track what they've signed up for and attended, and add events to Google Calendar.</p>
+        <h3>Why</h3>
+        <ul>
+          <li>Opportunities are scattered across Handshake, CCPA emails, department websites, the course catalog and club pages.</li>
+          <li>It's hard to tell which ones fit your major or class year without opening each one.</li>
+          <li>Deadlines are easy to miss, especially for first-years who don't know what to look for yet.</li>
+        </ul>
+        <h3>Who it's for</h3>
+        <div class="persona">
+          <div class="persona-avatar" aria-hidden="true">M</div>
+          <div>
+            <h4>Maya, Class of 2029</h4>
+            <p class="persona-meta">Sophomore · Economics major, Environmental Studies minor</p>
+            <ul>
+              <li><strong>Goal:</strong> land a summer internship that connects economics and sustainability.</li>
+              <li><strong>Frustration:</strong> gets dozens of emails a week and doesn't know which events or funding are meant for sophomores like Maya.</li>
+              <li><strong>Needs:</strong> a quick way to see what fits Maya's majors, what's due soon, and what's already been signed up for.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section id="brand" class="section-card">
+        <span class="section-num">Step 4</span>
+        <h2>Brand Identity</h2>
+        <p class="section-lede">Built to feel like it belongs at Haverford, with a little personality.</p>
+        <div class="brand-grid">
+          <div class="brand-panel">
+            <h3>Name &amp; logo</h3>
+            <div class="logo-showcase">
+              <img src="images/fordfutures-logo.png" alt="FordFutures logo: a squirrel in a graduation cap" width="256" height="256">
+              <p><strong>Ford</strong> for Haverford students (“Fords”), <strong>Futures</strong> for where they're headed. The squirrel nods to Haverford's campus squirrels, and the graduation cap points to life after college.</p>
+            </div>
+          </div>
+          <div class="brand-panel">
+            <h3>Typography</h3>
+            <p class="type-sample-serif">Libre Caslon Text</p>
+            <p class="type-note">Headings: a classic serif that echoes Haverford's own look.</p>
+            <p class="type-sample-sans">Source Sans 3</p>
+            <p class="type-note">Body text: clean and easy to scan on any screen.</p>
+          </div>
+          <div class="brand-panel">
+            <h3>Colors</h3>
+            <div class="swatches">
+              <div class="swatch"><i style="background:#8b1e2b"></i><b>Scarlet</b>#8B1E2B</div>
+              <div class="swatch"><i style="background:#6b1520"></i><b>Deep red</b>#6B1520</div>
+              <div class="swatch"><i style="background:#1c1c1c"></i><b>Black</b>#1C1C1C</div>
+              <div class="swatch"><i style="background:#f7f4ee"></i><b>Cream</b>#F7F4EE</div>
+              <div class="swatch"><i style="background:#b07d1a"></i><b>Gold</b>#B07D1A</div>
+            </div>
+          </div>
+          <div class="brand-panel">
+            <h3>Voice</h3>
+            <ul>
+              <li>Clear and direct: deadlines and requirements up front.</li>
+              <li>Encouraging, not overwhelming.</li>
+              <li>Made by a student, for students.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section id="testing" class="section-card">
+        <span class="section-num">Step 5</span>
+        <h2>What We Tested &amp; Learned</h2>
+        <p class="section-lede">We kept changing the site as we used it and got feedback.</p>
+        <table class="learn-table">
+          <thead>
+            <tr><th scope="col">What we tested</th><th scope="col">What we learned &amp; changed</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logo</td><td>A shield and a hand-drawn squirrel didn't feel right. A squirrel in a graduation cap was friendlier and more memorable, so it became the logo.</td></tr>
+            <tr><td>Button order</td><td>People look for the apply link first, so “Learn more &amp; apply” now comes before tracking buttons, and event cards say “Learn more &amp; register”.</td></tr>
+            <tr><td>Filter names</td><td>“Summer Program” was confusing next to summer internships and funding, so it became “Summer Education Program”. We added Volunteer, Career Prep and Graduate Program types as new kinds of listings came in.</td></tr>
+            <tr><td>Clubs</td><td>Listing every club made the site cluttered. Keeping only career- and major-focused clubs kept it useful.</td></tr>
+            <tr><td>Remembering events</td><td>Marking an event as signed up wasn't enough to remember it, so we added an “Add to Google Calendar” button.</td></tr>
+            <tr><td>Past deadlines</td><td>Expired listings cluttered results, so they're hidden by default but still viewable.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 6 -->
+      <section id="next-steps" class="section-card">
+        <span class="section-num">Step 6</span>
+        <h2>Next Steps &amp; Support Needed</h2>
+        <p class="section-lede">FordFutures works today. Here's what would make it last.</p>
+        <div class="steps-grid">
+          <div>
+            <h3>Next steps</h3>
+            <ul>
+              <li>Pull Haverford events from Handshake automatically instead of adding them by hand.</li>
+              <li>Send real email calendar invites when a student signs up.</li>
+              <li>Move profiles to a real database so they work on any device.</li>
+              <li>Run more testing with students from different majors and class years.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Support needed</h3>
+            <ul>
+              <li><strong>CCPA partnership</strong> to post and update listings directly.</li>
+              <li><strong>Handshake data access</strong> so events stay current.</li>
+              <li><strong>Hosting and a database</strong> for secure accounts and reminders.</li>
+              <li><strong>Student testers</strong> to keep improving the experience.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a href="index.html" class="apply-btn">Explore opportunities</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Always confirm deadlines and requirements with the posting organization before applying.</p>
+      <p>To list an opportunity, contact <a href="mailto:hc-ccpa@haverford.edu">hc-ccpa@haverford.edu</a></p>
+    </div>
+  </footer>
+
+  <script src="data/majors.js"></script>
+  <script src="data/opportunities.js"></script>
+  <script>
+    // Keep the hero numbers in sync with the listings.
+    (function () {
+      const set = (id, n) => { document.getElementById(id).textContent = n; };
+      set("stat-listings", OPPORTUNITIES.length);
+      set("stat-majors", MAJORS.length);
+      set("stat-types", TYPES.length);
+      set("stat-clubs", OPPORTUNITIES.filter((o) => o.type === "Club").length);
+    })();
+  </script>
+</body>
+</html>

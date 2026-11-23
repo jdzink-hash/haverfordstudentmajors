@@ -546,7 +546,7 @@ legend {
 .brand-panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
 .brand-panel h3 { margin-top: 0; }
 .logo-showcase { display: grid; gap: 10px; }
-.logo-showcase img { width: 88px; height: 88px; }
+.logo-showcase img { width: 120px; height: 120px; }
 .logo-showcase p { margin: 0; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
 .swatch { font-size: 13px; }

@@ -59,7 +59,7 @@ const Auth = (function () {
   }
 
   function emptyProfile(email) {
-    return { email, name: "", majors: [], classYear: "", signedUp: [], attended: [] };
+    return { email, name: "", majors: [], interests: [], classYear: "", signedUp: [], attended: [] };
   }
 
   function announce(profile) {

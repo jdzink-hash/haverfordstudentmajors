@@ -1,4 +1,4 @@
-// "My Profile" drawer: sign in / create account, edit majors and class year,
+// "My Profile" drawer: sign in / create account, edit majors, interests and class year,
 // and manage signed-up and attended events.
 
 const ProfileUI = (function () {
@@ -29,6 +29,7 @@ const ProfileUI = (function () {
     name: $("profile-name"),
     major1: $("profile-major-1"),
     major2: $("profile-major-2"),
+    interests: $("profile-interests"),
     year: $("profile-year"),
     saved: $("profile-saved"),
     signedUpList: $("signed-up-list"),
@@ -78,6 +79,19 @@ const ProfileUI = (function () {
   fillSelect(els.major1, MAJORS, "Select your major");
   fillSelect(els.major2, MAJORS, "None");
   fillSelect(els.year, CLASS_YEARS, "Select your class year");
+
+  Object.keys(INTERESTS).forEach((interest) => {
+    const label = el("label", "interest-pill");
+    const box = el("input");
+    box.type = "checkbox";
+    box.value = interest;
+    label.append(box, el("span", null, interest));
+    els.interests.appendChild(label);
+  });
+
+  function interestBoxes() {
+    return Array.from(els.interests.querySelectorAll("input"));
+  }
 
   // ---------- Drawer open/close ----------
 
@@ -157,6 +171,7 @@ const ProfileUI = (function () {
     await Auth.update({
       name: els.name.value.trim(),
       majors: Array.from(new Set(majors)),
+      interests: interestBoxes().filter((b) => b.checked).map((b) => b.value),
       classYear: els.year.value,
     });
     els.saved.hidden = false;
@@ -324,6 +339,7 @@ const ProfileUI = (function () {
       els.name.value = profile.name;
       els.major1.value = profile.majors[0] || "";
       els.major2.value = profile.majors[1] || "";
+      interestBoxes().forEach((b) => { b.checked = profile.interests.includes(b.value); });
       els.year.value = profile.classYear;
     }
     renderSignedUp(profile);

@@ -132,9 +132,23 @@
     return o.majors.includes(ALL_MAJORS) || o.majors.some((m) => majors.includes(m));
   }
 
+  const interestPatterns = Object.fromEntries(Object.entries(INTERESTS).map(([interest, words]) => {
+    const escaped = words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return [interest, new RegExp(`(^|[^a-z0-9])(${escaped.join("|")})(?![a-z0-9])`, "i")];
+  }));
+
+  // The first of the student's interests that this listing mentions, if any.
+  function matchedInterest(o, interests) {
+    const text = [o.title, o.organization, o.type, o.description].join(" ");
+    return interests.find((i) => interestPatterns[i] && interestPatterns[i].test(text));
+  }
+
   function isForProfile(o) {
     if (!profile) return false;
-    if (profile.majors.length && !matchesMajors(o, profile.majors)) return false;
+    const { majors, interests } = profile;
+    if ((majors.length || interests.length) &&
+        !(majors.length && matchesMajors(o, majors)) &&
+        !(interests.length && matchedInterest(o, interests))) return false;
     if (profile.classYear && o.classYears && !o.classYears.includes(profile.classYear)) return false;
     return true;
   }
@@ -205,8 +219,11 @@
 
     const top = el("div", "card-top");
     top.appendChild(el("span", `type-tag type-${slug(o.type)}`, o.type));
+    const interest = profile && matchedInterest(o, profile.interests);
     if (profile && profile.majors.length && matchesMajors(o, profile.majors) && !o.majors.includes(ALL_MAJORS)) {
       top.appendChild(el("span", "for-you-tag", "For your major"));
+    } else if (interest) {
+      top.appendChild(el("span", "for-you-tag", `For your interest: ${interest}`));
     }
     if (o.sample) top.appendChild(el("span", "sample-tag", "Sample listing"));
     top.appendChild(el("span", `deadline-badge ${badge.cls}`, badge.text));
@@ -388,10 +405,11 @@
     if (!profile) return;
     const parts = [];
     if (profile.majors.length) parts.push(profile.majors.join(" & "));
+    if (profile.interests.length) parts.push(profile.interests.length === 1 ? profile.interests[0] : `${profile.interests.length} interests`);
     if (profile.classYear) parts.push(profile.classYear);
     els.forYouHint.textContent = parts.length
       ? `Showing listings for ${parts.join(", ")}.`
-      : "Add your major in My Profile to get tailored listings.";
+      : "Add your major or interests in My Profile to get tailored listings.";
     els.forYou.disabled = !parts.length;
     if (!parts.length) state.forYou = false;
   }

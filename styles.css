@@ -168,6 +168,26 @@ a { color: var(--red); }
 
 .form-error { margin: 0; color: var(--red); font-weight: 600; }
 
+.interest-field { border: 0; margin: 0; padding: 0; }
+.interest-field legend {
+  padding: 0; margin-bottom: 2px;
+  font-size: 14px; font-weight: 700; color: var(--black);
+  text-transform: none; letter-spacing: 0;
+}
+.interest-hint { margin: 0 0 8px; font-size: 13px; color: var(--gray); }
+.interest-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.interest-pill { position: relative; cursor: pointer; }
+.stack .interest-pill { display: inline-block; font-weight: 600; }
+.interest-pill input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.interest-pill span {
+  display: inline-block; padding: 5px 12px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--white); color: var(--charcoal); font-size: 13px;
+}
+.interest-pill:hover span { border-color: var(--red); color: var(--red); }
+.interest-pill input:checked + span { background: var(--red); border-color: var(--red); color: var(--white); }
+.interest-pill input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 1px; }
+
 .primary-btn, .secondary-btn {
   font: inherit; font-weight: 700; cursor: pointer;
   border-radius: var(--radius); padding: 10px 18px;
